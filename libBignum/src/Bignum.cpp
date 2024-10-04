@@ -1,28 +1,26 @@
 #include "libBignum/include/Bignum.hpp"
 
-BigNum::BigNum(std::string num)
-{
-    setNum(num);
-}
-
-void BigNum::setNum(std::string num)
-{
-    m_num = num;
-}
-
-void BigNum::print()
-{
-    std::cout << m_num << std::endl;
-}
-
 void BigNum::pop(char num)
 {
     m_num = num + m_num;
 }
 
+std::istream &operator>>(std::istream &input, BigNum &bignum)
+{
+    input >> bignum.m_num;
+    return input;
+}
+
+std::ostream &operator<<(std::ostream &output, BigNum &bignum)
+{
+    output << bignum.m_num;
+    return output;
+}
+
 BigNum BigNum::operator=(BigNum bignum)
 {
-    m_num = bignum.m_num;
+    this->m_num = bignum.m_num;
+    return *this;
 }
 
 BigNum operator+(const BigNum& bignum_a, const BigNum& bignum_b)
@@ -71,4 +69,3 @@ BigNum operator+(const BigNum& bignum_a, const BigNum& bignum_b)
 
     return result;
 }
-
